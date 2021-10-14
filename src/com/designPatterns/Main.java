@@ -1,5 +1,9 @@
 package com.designPatterns;
 
+import com.designPatterns.Observer.Observables.Condition;
+import com.designPatterns.Observer.Observables.WeatherStation;
+import com.designPatterns.Observer.Observers.PCDisplay;
+import com.designPatterns.Observer.Observers.PhoneDisplay;
 import com.designPatterns.StrategyPattern.Ducks.Duck;
 import com.designPatterns.StrategyPattern.Ducks.SuperDuck;
 import com.designPatterns.StrategyPattern.Ducks.WildDuck;
@@ -24,6 +28,8 @@ public class Main {
         switch (pattern){
             case "1":
                 runStrategy();
+            case "2":
+                runObserver();
         }
 
     }
@@ -38,6 +44,11 @@ public class Main {
     }
 
     static void runObserver(){
-        
+        WeatherStation weatherStation = new WeatherStation();
+        PhoneDisplay phoneDisplay = new PhoneDisplay(weatherStation);
+        PCDisplay pcDisplay = new PCDisplay(weatherStation);
+
+        weatherStation.processNewReport(26, 99, Condition.RAINY);
+        weatherStation.processNewReport(38, 10, Condition.SUNNY);
     }
 }
